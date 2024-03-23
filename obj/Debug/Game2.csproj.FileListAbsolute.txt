@@ -1,0 +1,11 @@
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\Game2.exe.config
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\Game2.exe
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\Game2.pdb
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\OpenTK.dll
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\OpenTK.pdb
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\OpenTK.xml
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.csproj.AssemblyReference.cache
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.csproj.CoreCompileInputs.cache
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.csproj.Up2Date
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.exe
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.pdb
