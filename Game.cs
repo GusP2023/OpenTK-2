@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using Game2;
+using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
@@ -18,6 +19,13 @@ namespace Proyecto1
         private float lastX;
         private float lastY;
         private bool mouseDown;
+        private float ancho=10;
+        private float alto=10;
+        private float profundidad = 10;
+        public Vector3 origen= new Vector3(0,0,0);
+        public Escenario escenario;
+        public Color4 c;
+        //public Televisor TV,TV2;
 
 
         //-----------------------------------------------------------------------------------------------------------------
@@ -26,13 +34,53 @@ namespace Proyecto1
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
+
         }
         //-----------------------------------------------------------------------------------------------------------------
         protected override void OnLoad(EventArgs e)
         {
             GL.ClearColor(0.5f,0f,0f,0f);
-            
-            base.OnLoad(e);
+            //TV = new Televisor(new Vector3(0,0,0), 10);
+            //TV2 = new Televisor(new Vector3(-15, -15, 0), 7);
+            escenario = new Escenario(new Punto(0,0,0));
+            Poligono pantalla = new Poligono(Color4.Black, PrimitiveType.Polygon, new Punto(0, 0, 0));
+            //c = Color4.Black;//black DERECHA
+            pantalla.AddVertice("pantallav1",new Punto(origen.X + ancho, origen.Y + alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav2", new Punto(origen.X + ancho, origen.Y + alto, origen.Z + profundidad * 0.2f));
+            pantalla.AddVertice("pantallav3", new Punto(origen.X + ancho, origen.Y - alto, origen.Z + profundidad * 0.2f));
+            pantalla.AddVertice("pantallav4", new Punto(origen.X + ancho, origen.Y - alto, origen.Z - profundidad * 0.2f));
+            //c = Color4.Blue;//blue frente
+            pantalla.AddVertice("pantallav5", new Punto(origen.X + ancho, origen.Y + alto, origen.Z + profundidad * 0.2f));
+            pantalla.AddVertice("pantallav6", new Punto(origen.X - ancho, origen.Y + alto, origen.Z + profundidad * 0.2f));
+            pantalla.AddVertice("pantallav7", new Punto(origen.X - ancho, origen.Y - alto, origen.Z + profundidad * 0.2f));
+            //c = Color4.Black;
+            pantalla.AddVertice("pantallav8", new Punto(origen.X + ancho, origen.Y - alto, origen.Z + profundidad * 0.2f));
+            //c = Color4.Black;//black IZQUIERDA
+            pantalla.AddVertice("pantallav9", new Punto(origen.X - ancho, origen.Y - alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav10", new Punto(origen.X - ancho, origen.Y + alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav11", new Punto(origen.X - ancho, origen.Y + alto, origen.Z + profundidad * 0.2f));
+            pantalla.AddVertice("pantallav12", new Punto(origen.X - ancho, origen.Y - alto, origen.Z + profundidad * 0.2f));
+            //c = Color4.Yellow;//amarillo ABAJO
+            pantalla.AddVertice("pantallav13", new Punto(origen.X + ancho, origen.Y - alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav14", new Punto(origen.X - ancho, origen.Y - alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav15", new Punto(origen.X - ancho, origen.Y - alto, origen.Z + profundidad * 0.2f));
+            pantalla.AddVertice("pantallav16", new Punto(origen.X + ancho, origen.Y - alto, origen.Z + profundidad * 0.2f));
+            //c = Color4.Blue;//blue atras
+            pantalla.AddVertice("pantallav17", new Punto(origen.X + ancho, origen.Y + alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav18", new Punto(origen.X - ancho, origen.Y + alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav19", new Punto(origen.X - ancho, origen.Y - alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav20", new Punto(origen.X + ancho, origen.Y - alto, origen.Z - profundidad * 0.2f));
+            //c=Color4.Yellow;//amarillo ARRIBA
+            pantalla.AddVertice("pantallav21", new Punto(origen.X + ancho, origen.Y + alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav22", new Punto(origen.X - ancho, origen.Y + alto, origen.Z - profundidad * 0.2f));
+            pantalla.AddVertice("pantallav23", new Punto(origen.X - ancho, origen.Y + alto, origen.Z + profundidad * 0.2f));
+            pantalla.AddVertice("pantallav24", new Punto(origen.X + ancho, origen.Y + alto, origen.Z + profundidad * 0.2f));
+            Partes pantallaP = new Partes(0,0,0);
+            pantallaP.addPoligono("pantalla", pantalla);
+            Objeto pantallaO = new Objeto(0, 0, 0);
+            pantallaO.addParte("pantalla", pantallaP);
+            escenario.addObjeto("Televisor", pantallaO);
+            base.OnLoad(e); 
         }
         //-----------------------------------------------------------------------------------------------------------------
         protected override void OnUnload(EventArgs e)
@@ -48,108 +96,22 @@ namespace Proyecto1
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Enable(EnableCap.DepthTest);
             GL.LoadIdentity();
-            //--------------------------------------------------------------
-            //GL.Rotate(20, 1, 1, 0);
-            GL.Rotate(rotationX, 1, 0, 0);
-            GL.Rotate(rotationY, 0, 1, 0);
-            PrimitiveType primitiveType = PrimitiveType.Quads;
-            GL.Begin(primitiveType);
-            //GL.Color4(Color4.Aqua);
-            GL.Color3(0, 0.0, 0.0);//black DERECHA
-            GL.Vertex3(10, 10, -2);
-            GL.Vertex3(10, 10, 2);
-            GL.Vertex3(10, -10, 2);
-            GL.Vertex3(10, -10, -2);
-            GL.Color3(0, 0.0, 0.0);//black IZQUIERDA
-            GL.Vertex3(-10, -10, -2);
-            GL.Vertex3(-10, 10, -2);
-            GL.Vertex3(-10, 10, 2);
-            GL.Vertex3(-10, -10, 2);
-            GL.Color3(1, 1.0, 0.0);//amarillo ABAJO
-            GL.Vertex3(10, -10, -2);
-            GL.Vertex3(-10, -10, -2);
-            GL.Vertex3(-10, -10, 2);
-            GL.Vertex3(10, -10, 2);
-            GL.Color3(1, 1.0, 0.0);//amarillo ARRIBA
-            GL.Vertex3(10, 10, -2);
-            GL.Vertex3(-10, 10, -2);
-            GL.Vertex3(-10, 10, 2);
-            GL.Vertex3(10, 10, 2);
-            GL.Color3(0, 0, 1f);//blue frente
-            GL.Vertex3(10, 10, 2);
-            GL.Vertex3(-10, 10, 2);
-            GL.Vertex3(-10, -10, 2);
-            GL.Color3(0, 0.0, 0.0);
-            GL.Vertex3(10, -10, 2);
-            GL.Color3(0, 0, 1.0);//blue atras
-            GL.Vertex3(10, 10, -2);
-            GL.Vertex3(-10, 10, -2);
-            GL.Vertex3(-10,-10, -2);
-            GL.Vertex3(10, -10, -2);
-            GL.Color3(0, 1.0, 0.0);//verde PARLANTE IZQUIERDO FRENTE
-            GL.Vertex3(-10, -10, 2);
-            GL.Vertex3(-10, -12, 2);
-            GL.Vertex3(-1, -12, 2);            
-            GL.Vertex3(-1, -10, 2);
-            GL.Color3(0, 1.0, 0.0);//verde PARLANTE IZQUIERDO DERECHA
-            GL.Vertex3(-10, -10, 2);
-            GL.Vertex3(-10, -12, 2);
-            GL.Vertex3(-10, -12, -2);
-            GL.Vertex3(-10, -10, -2);
-            GL.Color3(0, 1.0, 0.0);//verde PARLANTE IZQUIERDO ATRAS
-            GL.Vertex3(-10, -10, -2);
-            GL.Vertex3(-10, -12, -2);
-            GL.Vertex3(-1, -12, -2);
-            GL.Vertex3(-1, -10, -2);
-            GL.Color3(0, 1.0, 0.0);//verde PARLANTE DERECHA FRENTE
-            GL.Vertex3(10, -10, 2);
-            GL.Vertex3(10, -12, 2);
-            GL.Vertex3(1, -12, 2);
-            GL.Vertex3(1, -10, 2);
-            GL.Color3(0, 1.0, 0.0);//verde PARLANTE DERECHA DERECHA
-            GL.Vertex3(10, -10, 2);
-            GL.Vertex3(10, -12, 2);
-            GL.Vertex3(10, -12, -2);
-            GL.Vertex3(10, -10, -2);
-            GL.Color3(0, 1.0, 0.0);//verde PARLANTE DERECHA ATRAS
-            GL.Vertex3(10, -10, -2);
-            GL.Vertex3(10, -12, -2);
-            GL.Vertex3(1, -12, -2);
-            GL.Vertex3(1, -10, -2);
-            GL.Color3(0, 0.0, 0.0);//BLACK SOPORTE FRENTE
-            GL.Vertex3(-0.5f, -10, 2);
-            GL.Vertex3(-2, -18, 2);
-            GL.Vertex3(2, -18, 2);
-            GL.Vertex3(0.5, -10, 2);
-            GL.Color3(0, 0.0, 0.0);//BLACK SOPORTE DERECHA
-            GL.Vertex3(-0.5f, -10, 2);
-            GL.Vertex3(-2, -18, 2);
-            GL.Vertex3(-2, -18, -2);
-            GL.Vertex3(-0.5, -10, -2);
-            GL.Color3(0, 0.0, 0.0);//BLACK SOPORTE izquierda
-            GL.Vertex3(0.5f, -10, 2);
-            GL.Vertex3(2, -18, 2);
-            GL.Vertex3(2, -18, -2);
-            GL.Vertex3(0.5, -10, -2);
-            GL.Color3(0, 0.0, 0.0);//BLACK SOPORTE ATRAS
-            GL.Vertex3(-0.5f, -10, -2);
-            GL.Vertex3(-2, -18, -2);
-            GL.Vertex3(2, -18, -2);
-            GL.Vertex3(0.5, -10, -2);
-            GL.End();
-
+            //--------------------------------------------------------------            
+            //TV.rotar(rotationX, rotationY);            
+            //TV.dibujar();
+            //TV2.dibujar();
+            escenario.rotate(rotationX, rotationY);
+            escenario.draw();
             //-------------------------------------------------------------
-            
+
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Key.Escape))
             {
                 Exit();
                 return;
             }
-            //if (keyboardState.IsKeyDown(Keys.S))
-            //{
-            //    Escena.Scale(new Punto(sx+1, sy+1, sz+1));
-            //}
+
+            //------------------------------------------------------------------------------------
             MouseMove += (sender, args) =>
             {
                 if (mouseDown)
@@ -191,7 +153,7 @@ namespace Proyecto1
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
             GL.Ortho(-d, d, -d, d, -d, d);
-            //GL.Frustum(-80, 80, -80, 80, 4, 100);
+            //GL.Frustum(-d, d, -d, d,2, 100);
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();
             base.OnResize(e);

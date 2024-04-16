@@ -9,3 +9,6 @@ C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.csproj.CoreCompi
 C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.csproj.Up2Date
 C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.exe
 C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\obj\Debug\Game2.pdb
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\System.Drawing.Common.dll
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\System.Drawing.Common.pdb
+C:\Users\USUARIO\Desktop\VISUAL BASIC\PR2\Game2\bin\Debug\System.Drawing.Common.xml
